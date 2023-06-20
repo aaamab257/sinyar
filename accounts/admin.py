@@ -1,0 +1,8 @@
+from django.contrib import admin
+from .models import *
+# Register your models here.
+
+@admin.register(User)
+class CartItemAdmin( admin.ModelAdmin):
+    prepopulated_fields = {'name': ('name',)}
+    list_display = ('name', 'email')
