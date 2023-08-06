@@ -1,1 +1,1 @@
-web: gunicorn sinyar.wsgi --log-file -
+web: gunicorn src.wsgi --log-file -
