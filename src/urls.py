@@ -24,7 +24,7 @@ from dashboard.views import set_language
 urlpatterns = i18n_patterns(
     path('', include('dashboard.urls')),
     path("admin/", admin.site.urls),
-    path("dashboard", include('admin_black.urls')),
+    path("dashboard/", include('admin_black.urls')),
     path("auth/" , include('accounts.urls')),
     path('shop/', include('shop.urls')),
     path('cart/', include('cart.urls')),
