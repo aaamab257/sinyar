@@ -15,8 +15,9 @@ import os, random, string
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
 import dj_database_url
-
+from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -26,9 +27,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 #SECRET_KEY = "django-insecure-cibuo1z50wi(e1ux_6_*xk(fmsy5dkmj5r3))vp)_l(w=+f%=_"
 
-SECRET_KEY = os.environ.get('django-insecure-cibuo1z50wi(e1ux_6_*xk(fmsy5dkmj5r3))vp)_l(w=+f%=_')
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+SECRET_KEY=config('SECRET_KEY')
+DEBUG = config('DEBUG',default=False ,cast=bool)
 
 ALLOWED_HOSTS = ['*']
 
