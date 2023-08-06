@@ -31,6 +31,20 @@
                         <span class="d-lg-none d-md-block">Search</span>
                     </button>
                 </li>
+                <li class="dropdown nav-item" data-animation="fadeIn">
+                    <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <div class="language d-none d-lg-block d-xl-block"></div>
+                        <i class="tim-icons icon-pencil"></i>
+                        <p class="d-lg-none">
+                            Language
+                        </p>
+                        
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
+                        <li class="nav-link"><a href="{% url 'set-language' 'ar' %}" class="nav-item dropdown-item">AR</a></a></li>
+                        <li class="nav-link"><a href="{% url 'set-language' 'en' %}" class="nav-item dropdown-item">EN</a></li>
+                    </ul>
+                </li>
                 <li class="dropdown nav-item">
                     <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
                         <div class="notification d-none d-lg-block d-xl-block"></div>
@@ -53,7 +67,7 @@
                     </ul>
                 </li>
                 <li class="dropdown nav-item">
-                    <a href="{% url 'admin:logout' %}" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                    <a href="{% url 'logout' %}" class="dropdown-toggle nav-link" data-toggle="dropdown">
                         <div class="photo">
                             <img src="{% static 'assets/img/anime3.png' %}" alt="Profile Photo">
                         </div>

@@ -7,27 +7,11 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from .models import *
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
+from django.utils.translation import gettext
+from django.conf import settings
+from django.utils import translation
 
-class UserRegisterAPIView(APIView):
-    def post(self, request, format=None):
-        serializer = UserSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({'user':serializer.data , 'registered':True}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class UserLoginAPIView(APIView):
-    def post(self, request, format=None):
-        email = request.data.get('email')
-        password = request.data.get('password')
-        user = authenticate(username=email, password=password)
-        if user is not None:
-            login(request, user)
-            user_serializer = UserSerializer(user)
-            refresh = RefreshToken.for_user(user)
-            serializer = TokenSerializer({'access': str(refresh.access_token), 'refresh': str(refresh)})
-            return Response({'Token':serializer.data , 'user':user_serializer.data})
-        return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
     
 
 
@@ -35,13 +19,20 @@ class ProductListAPIView(APIView):
     def get(self, request, format=None):
         products = Product.objects.all()
         serializer = ProductSerializer(products, many=True)
-        return Response({'products':serializer.data})
+        message = gettext('Hello, World!')
+        language = request.META.get('HTTP_ACCEPT_LANGUAGE')
+        if language:
+            translation.activate(language)
+        return Response({'products':serializer.data , 'msg': message })
     
 
 class CategoryListAPIView(APIView):
     def get(self, request, format=None):
         categories = Category.objects.all()
         serializer = CategorySerializer(categories, many=True)
+        language = request.META.get('HTTP_ACCEPT_LANGUAGE')
+        if language:
+            translation.activate(language)
         return Response(serializer.data)
     
 
@@ -56,6 +47,9 @@ class SubCategoryProductListAPIView(APIView):
             return Response({'error': 'Subcategory does not exist.'}, status=status.HTTP_404_NOT_FOUND)
 
         serializer = SubCategorySerializer(subcategory)
+        language = request.META.get('HTTP_ACCEPT_LANGUAGE')
+        if language:
+            translation.activate(language)
         return Response(serializer.data)
     
 
@@ -73,4 +67,7 @@ class FavoriteProductCreateAPIView(APIView):
 
         user.favorites.add(product)
         user_serializer = UserSerializer(user)
+        language = request.META.get('HTTP_ACCEPT_LANGUAGE')
+        if language:
+            translation.activate(language)
         return Response(user_serializer.data)

@@ -16,11 +16,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf import settings
+from django.conf.urls.static import static
+from django.conf.urls.i18n import i18n_patterns
+from dashboard.views import set_language
 
-urlpatterns = [
+urlpatterns = i18n_patterns(
     path('', include('dashboard.urls')),
     path("admin/", admin.site.urls),
-    path("", include('admin_black.urls')),
+    path("dashboard", include('admin_black.urls')),
+    path("auth/" , include('accounts.urls')),
     path('shop/', include('shop.urls')),
-    path('cart/', include('cart.urls'))
-]
+    path('cart/', include('cart.urls')),
+    path('installment/', include('installment.urls')),
+    path('provider/', include('provider.urls')),
+    path("set_language/<str:language>", set_language, name="set-language"),
+
+    prefix_default_language=False
+    
+)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+

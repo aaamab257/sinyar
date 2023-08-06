@@ -1,12 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser , BaseUserManager
 from django.contrib.auth.models import Permission ,PermissionsMixin
+from django.utils.translation import gettext_lazy as _
 # Create your models here.
 
 
 
 class MyUserManager(BaseUserManager):
-    def create_user(self, email ,  name ,phone, is_admin, password=None,password2=None,date_of_birth=None  ):
+    def create_user(self, email ,  name ,phone, is_admin,is_vendor , is_user ,  password=None,password2=None,date_of_birth=None  ):
         
         if not email:
             raise ValueError('Users must have an email address')
@@ -18,27 +19,34 @@ class MyUserManager(BaseUserManager):
             phone = phone,
             date_of_birth = date_of_birth,
             is_admin = is_admin,
+            is_user = is_user,
+            is_vendor = is_vendor
             
         )
+        user.is_user = is_user 
+        user.is_vendor = is_vendor 
         user.phone = phone
         user.is_admin = is_admin
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email,phone,is_admin ,  name , password=None ):
+    def create_superuser(self, email,phone,is_admin ,is_user,is_vendor  ,  name , password=None ):
         
         user = self.create_user(
             email,
             name = name,
             password=password,
+            is_user = is_user,
+            is_vendor = is_vendor,
             
             phone=phone,
             is_admin=is_admin
         )
         user.phone = phone
         user.name = name
-        
+        user.is_user = False 
+        user.is_vendor = False 
         user.is_admin = True
         user.set_password(password)
         user.save(using=self._db)
@@ -54,17 +62,18 @@ class User(AbstractBaseUser, PermissionsMixin):
         unique=True,
     )
     name = models.CharField(max_length=255)
-    phone = models.BigIntegerField()
+    phone = models.BigIntegerField(unique=True,)
     date_of_birth = models.CharField(max_length=55,null=True,blank=False)
-    
+    is_vendor=  models.BooleanField(default=False , null=True)
+    is_user = models.BooleanField(default=False, null=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = MyUserManager()
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name','phone' , 'is_admin']
+    USERNAME_FIELD = 'phone'
+    REQUIRED_FIELDS = ['name','email' , 'is_admin']
 
     def __str__(self):
         return "{}".format(self.email)
@@ -83,3 +92,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     def is_staff(self):
         
         return self.is_admin
+    
+    class Meta:
+        verbose_name = _('User')
+        verbose_name_plural = _('User')
