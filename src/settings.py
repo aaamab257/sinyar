@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get('django-insecure-cibuo1z50wi(e1ux_6_*xk(fmsy5dkmj5r3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["sinyar.herokuapp.com", "127.0.0.1"]
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
