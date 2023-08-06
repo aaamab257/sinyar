@@ -39,3 +39,4 @@ class UserLoginAPIView(APIView):
 def user_logout_view(request):
   logout(request)
   return redirect('/admin/login/')
+
