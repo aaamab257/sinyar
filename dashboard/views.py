@@ -7,10 +7,19 @@ from django.urls.exceptions import Resolver404
 from django.utils import translation
 # Create your views here.
 def index(request):
-
-    # Page from the theme 
     return render(request, 'pages/dashboard.html')
 
+
+def setLanguage(request, language):
+    if request.method == 'POST':
+        language = request.POST.get('language')
+        if language in ['en', 'fr']:  # Specify the supported languages
+            request.session['django_language'] = language
+            translation.activate(language)
+            response = index(request)
+            response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language)
+        else:
+            return render(request, 'pages/dashboard.html')
 
 
 def set_language(request, language):

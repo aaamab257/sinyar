@@ -31,20 +31,6 @@
                         <span class="d-lg-none d-md-block">Search</span>
                     </button>
                 </li>
-                <li class="dropdown nav-item" data-animation="fadeIn">
-                    <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                        <div class="language d-none d-lg-block d-xl-block"></div>
-                        <i class="tim-icons icon-pencil"></i>
-                        <p class="d-lg-none">
-                            Language
-                        </p>
-                        
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
-                        <li class="nav-link"><a href="{% url 'set-language' 'ar' %}" class="nav-item dropdown-item">AR</a></a></li>
-                        <li class="nav-link"><a href="{% url 'set-language' 'en' %}" class="nav-item dropdown-item">EN</a></li>
-                    </ul>
-                </li>
                 <li class="dropdown nav-item">
                     <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
                         <div class="notification d-none d-lg-block d-xl-block"></div>
@@ -54,20 +40,30 @@
                         </p>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
-                        <li class="nav-link"><a href="#" class="nav-item dropdown-item">Mike John responded to
-                                your email</a></li>
+                        
                         <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">You
-                                have 5 more tasks</a></li>
-                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Your
-                                friend Michael is in town</a></li>
-                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Another
-                                notification</a></li>
-                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Another
-                                one</a></li>
+                                have 5 more requests</a></li>
+                        
                     </ul>
                 </li>
                 <li class="dropdown nav-item">
-                    <a href="{% url 'logout' %}" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                    <a href="{% url 'admin:logout' %}" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <div class="photo">
+                            <img src="{% static 'assets/img/lang.png' %}" alt="language Photo">
+                        </div>
+                        <b class="caret d-none d-lg-block d-xl-block"></b>
+                        
+                    </a>
+                    <ul class="dropdown-menu dropdown-navbar">
+                        
+                        
+                        <li class="nav-link"><a href="{% url 'set-language' 'ar' %}" class="dropdown-item">Arabic</a></li>
+                    <li class="nav-link"><a href="{% url 'set-language' 'en' %}" class="nav-item dropdown-item">English</a></li>
+                       
+                    </ul>
+                </li>
+                <li class="dropdown nav-item">
+                    <a href="{% url 'admin:logout' %}" class="dropdown-toggle nav-link" data-toggle="dropdown">
                         <div class="photo">
                             <img src="{% static 'assets/img/anime3.png' %}" alt="Profile Photo">
                         </div>
@@ -77,10 +73,7 @@
                         </p>
                     </a>
                     <ul class="dropdown-menu dropdown-navbar">
-                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Profile</a>
-                        </li>
-                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Settings</a>
-                        </li>
+                        
                         <li class="dropdown-divider"></li>
                         {% if request.user.is_authenticated %}
                         {% if request.user.is_superuser %}
