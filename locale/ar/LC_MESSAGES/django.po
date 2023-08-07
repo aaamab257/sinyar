@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-02 16:02+0300\n"
+"POT-Creation-Date: 2023-08-07 11:27+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,12 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: .\accounts\apps.py:7 .\templates\pages\dashboard.html:21
+#: .\accounts\apps.py:7
 msgid "Accounts"
 msgstr "حسابات"
 
-#: .\accounts\models.py:97 .\accounts\models.py:98
+#: .\accounts\models.py:97 .\accounts\models.py:98 .\installment\models.py:29
+#: .\shop\models.py:129 .\templates\admin\object_history.html:50
 #: .\venv\Lib\site-packages\admin_black\templates\admin\object_history.html:50
 msgid "User"
 msgstr "المستخدمين"
@@ -31,12 +32,19 @@ msgstr "المستخدمين"
 msgid "Cart"
 msgstr "السلة"
 
-#: .\dashboard\apps.py:7 .\templates\includes\menu-list.html:8
+#: .\dashboard\apps.py:7
 msgid "Dashboard"
 msgstr "لوحة التحكم"
 
-#: .\installment\apps.py:7
+#: .\installment\apps.py:7 .\installment\models.py:63
+#: .\installment\models.py:64
 msgid "Installment"
+msgstr "انظمه التقسيط"
+
+#: .\installment\models.py:24 .\installment\models.py:25
+#, fuzzy
+#| msgid "Installment"
+msgid "InstallMentsPlans"
 msgstr "انظمه التقسيط"
 
 #: .\provider\apps.py:8 .\provider\models.py:32
@@ -69,69 +77,53 @@ msgstr "مقدم الخدمه"
 msgid "Product Name"
 msgstr "اسم المنتج"
 
-#: .\shop\models.py:76
+#: .\shop\models.py:77
 msgid "products"
+msgstr "المنتجات"
+
+#: .\shop\models.py:130
+msgid "Plan"
+msgstr ""
+
+#: .\shop\models.py:131
+#, fuzzy
+#| msgid "products"
+msgid "Product"
 msgstr "المنتجات"
 
 #: .\shop\views.py:22
 msgid "Hello, World!"
 msgstr "مرحبا"
 
-#: .\src\settings.py:149
+#: .\src\settings.py:160
 msgid "Arabic"
 msgstr "العربيه"
 
-#: .\src\settings.py:150
+#: .\src\settings.py:161
 msgid "English"
 msgstr "الانجليزية"
 
-#: .\templates\includes\menu-list.html:25
-#: .\venv\Lib\site-packages\admin_black\templates\admin\login.html:40
-msgid "login"
-msgstr "تسجيل دخول"
-
-#: .\templates\includes\menu-list.html:31
-msgid "Register"
-msgstr "تسجيل جديد"
-
-#: .\templates\includes\menu-list.html:125
-msgid "Logout"
-msgstr "تسجيل خروج"
-
-#: .\templates\pages\dashboard.html:28
-msgid "Purchases"
-msgstr "المشتريات"
-
-#: .\templates\pages\dashboard.html:35
-msgid "Sessions"
-msgstr "جلسات"
-
-#: .\venv\Lib\site-packages\admin_black\forms.py:8
-#: .\venv\Lib\site-packages\admin_black\forms.py:9
-msgid "Password"
-msgstr ""
-
-#: .\venv\Lib\site-packages\admin_black\forms.py:12
-msgid "Password Confirmation"
-msgstr ""
-
+#: .\templates\accounts\auth-signin.html:22
 #: .\venv\Lib\site-packages\admin_black\templates\accounts\auth-signin.html:22
-#: .\venv\Lib\site-packages\admin_black\templates\admin\login.html:23
-msgid "CT Admin Dash"
+msgid "Sinyar Admin"
 msgstr ""
 
+#: .\templates\admin\actions.html:14
 #: .\venv\Lib\site-packages\admin_black\templates\admin\actions.html:14
 msgid "Run the selected action"
 msgstr ""
 
+#: .\templates\admin\actions.html:15
 #: .\venv\Lib\site-packages\admin_black\templates\admin\actions.html:15
 msgid "Go"
 msgstr "نفذ"
 
+#: .\templates\admin\actions.html:25
 #: .\venv\Lib\site-packages\admin_black\templates\admin\actions.html:25
 msgid "Click here to select the objects across all pages"
 msgstr ""
 
+#: .\templates\admin\actions.html:25
 #: .\venv\Lib\site-packages\admin_black\templates\admin\actions.html:25
 #, python-format
 msgid ""
@@ -139,25 +131,31 @@ msgid ""
 "                            Select all %(total_count)s %(module_name)s"
 msgstr ""
 
+#: .\templates\admin\actions.html:28
 #: .\venv\Lib\site-packages\admin_black\templates\admin\actions.html:28
 msgid "Clear selection"
 msgstr ""
 
+#: .\templates\admin\auth\user\add_form.html:6
 #: .\venv\Lib\site-packages\admin_black\templates\admin\auth\user\add_form.html:6
 msgid ""
 "First, enter a username and password. Then, you'll be able to edit more user "
 "options."
 msgstr ""
 
+#: .\templates\admin\auth\user\add_form.html:8
 #: .\venv\Lib\site-packages\admin_black\templates\admin\auth\user\add_form.html:8
 msgid "Enter a username and password."
 msgstr ""
 
+#: .\templates\admin\auth\user\change_password.html:41
+#: .\templates\registration\password_change_done.html:19
 #: .\venv\Lib\site-packages\admin_black\templates\admin\auth\user\change_password.html:41
 #: .\venv\Lib\site-packages\admin_black\templates\registration\password_change_done.html:19
 msgid "Change password"
 msgstr ""
 
+#: .\templates\admin\auth\user\change_password.html:55
 #: .\venv\Lib\site-packages\admin_black\templates\admin\auth\user\change_password.html:55
 #, python-format
 msgid ""
@@ -167,22 +165,30 @@ msgid ""
 "                        "
 msgstr ""
 
+#: .\templates\admin\auth\user\change_password.html:91
+#: .\templates\registration\password_change_form.html:73
 #: .\venv\Lib\site-packages\admin_black\templates\admin\auth\user\change_password.html:91
 #: .\venv\Lib\site-packages\admin_black\templates\registration\password_change_form.html:73
 msgid "Change my password"
 msgstr ""
 
+#: .\templates\admin\auth\user\change_password.html:106
+#: .\templates\admin\login.html:125
 #: .\venv\Lib\site-packages\admin_black\templates\admin\auth\user\change_password.html:106
 #: .\venv\Lib\site-packages\admin_black\templates\admin\login.html:125
 msgid "Please correct the error below."
 msgstr ""
 
+#: .\templates\admin\auth\user\change_password.html:108
+#: .\templates\admin\login.html:127
+#: .\templates\registration\password_change_form.html:88
 #: .\venv\Lib\site-packages\admin_black\templates\admin\auth\user\change_password.html:108
 #: .\venv\Lib\site-packages\admin_black\templates\admin\login.html:127
 #: .\venv\Lib\site-packages\admin_black\templates\registration\password_change_form.html:88
 msgid "Please correct the errors below."
 msgstr ""
 
+#: .\templates\admin\change_form.html:45
 #: .\venv\Lib\site-packages\admin_black\templates\admin\change_form.html:45
 #, python-format
 msgid ""
@@ -190,46 +196,60 @@ msgid ""
 "                                %(name)s"
 msgstr ""
 
+#: .\templates\admin\change_form.html:64
+#: .\templates\admin\change_list_object_tools.html:8
 #: .\venv\Lib\site-packages\admin_black\templates\admin\change_form.html:64
 #: .\venv\Lib\site-packages\admin_black\templates\admin\change_list_object_tools.html:8
 #, python-format
 msgid "Add %(name)s"
 msgstr ""
 
+#: .\templates\admin\change_form_object_tools.html:5
+#: .\templates\admin\object_history.html:32
 #: .\venv\Lib\site-packages\admin_black\templates\admin\change_form_object_tools.html:5
 #: .\venv\Lib\site-packages\admin_black\templates\admin\object_history.html:32
 msgid "History"
 msgstr ""
 
+#: .\templates\admin\change_form_object_tools.html:10
+#: .\templates\admin\edit_inline\stacked.html:32
+#: .\templates\admin\edit_inline\tabular.html:64
 #: .\venv\Lib\site-packages\admin_black\templates\admin\change_form_object_tools.html:10
 #: .\venv\Lib\site-packages\admin_black\templates\admin\edit_inline\stacked.html:32
 #: .\venv\Lib\site-packages\admin_black\templates\admin\edit_inline\tabular.html:64
 msgid "View on site"
 msgstr ""
 
+#: .\templates\admin\change_list.html:110
 #: .\venv\Lib\site-packages\admin_black\templates\admin\change_list.html:110
 msgid "Filter"
 msgstr ""
 
+#: .\templates\admin\change_list_results.html:18
 #: .\venv\Lib\site-packages\admin_black\templates\admin\change_list_results.html:18
 msgid "Remove from sorting"
 msgstr ""
 
+#: .\templates\admin\change_list_results.html:20
 #: .\venv\Lib\site-packages\admin_black\templates\admin\change_list_results.html:20
 #, python-format
 msgid "Sorting priority: %(priority_number)s"
 msgstr ""
 
+#: .\templates\admin\change_list_results.html:22
 #: .\venv\Lib\site-packages\admin_black\templates\admin\change_list_results.html:22
 msgid "Toggle sorting"
 msgstr ""
 
+#: .\templates\admin\delete_confirmation.html:38
+#: .\templates\admin\submit_line.html:28
 #: .\venv\Lib\site-packages\admin_black\templates\admin\delete_confirmation.html:38
 #: .\venv\Lib\site-packages\admin_black\templates\admin\submit_line.html:28
 #: .\venv\Lib\site-packages\django\forms\formsets.py:499
 msgid "Delete"
 msgstr ""
 
+#: .\templates\admin\delete_confirmation.html:55
 #: .\venv\Lib\site-packages\admin_black\templates\admin\delete_confirmation.html:55
 #, python-format
 msgid ""
@@ -242,6 +262,7 @@ msgid ""
 "                                    "
 msgstr ""
 
+#: .\templates\admin\delete_confirmation.html:73
 #: .\venv\Lib\site-packages\admin_black\templates\admin\delete_confirmation.html:73
 #, python-format
 msgid ""
@@ -253,6 +274,7 @@ msgid ""
 "                                    "
 msgstr ""
 
+#: .\templates\admin\delete_confirmation.html:90
 #: .\venv\Lib\site-packages\admin_black\templates\admin\delete_confirmation.html:90
 #, python-format
 msgid ""
@@ -264,25 +286,33 @@ msgid ""
 "                                    "
 msgstr ""
 
+#: .\templates\admin\delete_confirmation.html:104
+#: .\templates\admin\delete_selected_confirmation.html:104
 #: .\venv\Lib\site-packages\admin_black\templates\admin\delete_confirmation.html:104
 #: .\venv\Lib\site-packages\admin_black\templates\admin\delete_selected_confirmation.html:104
 msgid "Objects"
 msgstr ""
 
+#: .\templates\admin\delete_confirmation.html:125
+#: .\templates\admin\delete_selected_confirmation.html:123
 #: .\venv\Lib\site-packages\admin_black\templates\admin\delete_confirmation.html:125
 #: .\venv\Lib\site-packages\admin_black\templates\admin\delete_selected_confirmation.html:123
 msgid "Yes, I'm sure"
 msgstr ""
 
+#: .\templates\admin\delete_confirmation.html:127
+#: .\templates\admin\delete_selected_confirmation.html:125
 #: .\venv\Lib\site-packages\admin_black\templates\admin\delete_confirmation.html:127
 #: .\venv\Lib\site-packages\admin_black\templates\admin\delete_selected_confirmation.html:125
 msgid "No, take me back"
 msgstr ""
 
+#: .\templates\admin\delete_selected_confirmation.html:38
 #: .\venv\Lib\site-packages\admin_black\templates\admin\delete_selected_confirmation.html:38
 msgid "Delete multiple objects"
 msgstr ""
 
+#: .\templates\admin\delete_selected_confirmation.html:55
 #: .\venv\Lib\site-packages\admin_black\templates\admin\delete_selected_confirmation.html:55
 #, python-format
 msgid ""
@@ -295,6 +325,7 @@ msgid ""
 "                                "
 msgstr ""
 
+#: .\templates\admin\delete_selected_confirmation.html:73
 #: .\venv\Lib\site-packages\admin_black\templates\admin\delete_selected_confirmation.html:73
 #, python-format
 msgid ""
@@ -305,6 +336,7 @@ msgid ""
 "                                "
 msgstr ""
 
+#: .\templates\admin\delete_selected_confirmation.html:90
 #: .\venv\Lib\site-packages\admin_black\templates\admin\delete_selected_confirmation.html:90
 #, python-format
 msgid ""
@@ -316,30 +348,39 @@ msgid ""
 "                                "
 msgstr ""
 
+#: .\templates\admin\edit_inline\stacked.html:29
+#: .\templates\admin\edit_inline\tabular.html:60
 #: .\venv\Lib\site-packages\admin_black\templates\admin\edit_inline\stacked.html:29
 #: .\venv\Lib\site-packages\admin_black\templates\admin\edit_inline\tabular.html:60
 #: .\venv\Lib\site-packages\django\forms\widgets.py:465
 msgid "Change"
 msgstr ""
 
+#: .\templates\admin\edit_inline\stacked.html:29
+#: .\templates\admin\edit_inline\tabular.html:60
 #: .\venv\Lib\site-packages\admin_black\templates\admin\edit_inline\stacked.html:29
 #: .\venv\Lib\site-packages\admin_black\templates\admin\edit_inline\tabular.html:60
 msgid "View"
 msgstr ""
 
+#: .\templates\admin\edit_inline\tabular.html:37
 #: .\venv\Lib\site-packages\admin_black\templates\admin\edit_inline\tabular.html:37
 msgid "Delete?"
 msgstr ""
 
+#: .\templates\admin\filter.html:5
 #: .\venv\Lib\site-packages\admin_black\templates\admin\filter.html:5
 #, python-format
 msgid " By %(filter_title)s "
 msgstr ""
 
+#: .\templates\admin\includes\object_delete_summary.html:5
 #: .\venv\Lib\site-packages\admin_black\templates\admin\includes\object_delete_summary.html:5
 msgid "Summary"
 msgstr ""
 
+#: .\templates\admin\invalid_setup.html:32
+#: .\templates\admin\invalid_setup.html:54
 #: .\venv\Lib\site-packages\admin_black\templates\admin\invalid_setup.html:32
 #: .\venv\Lib\site-packages\admin_black\templates\admin\invalid_setup.html:54
 msgid ""
@@ -348,38 +389,61 @@ msgid ""
 "the appropriate user."
 msgstr ""
 
+#: .\templates\admin\login.html:23
+#: .\venv\Lib\site-packages\admin_black\templates\admin\login.html:23
+msgid "CT Admin Dash"
+msgstr ""
+
+#: .\templates\admin\login.html:40
+#: .\venv\Lib\site-packages\admin_black\templates\admin\login.html:40
+msgid "login"
+msgstr "تسجيل دخول"
+
+#: .\templates\admin\login.html:67
 #: .\venv\Lib\site-packages\admin_black\templates\admin\login.html:67
 msgid "Phone Number"
 msgstr "رقم الهاتف"
 
+#: .\templates\admin\login.html:78
+#: .\venv\Lib\site-packages\admin_black\templates\admin\login.html:78
+msgid "Signin"
+msgstr ""
+
+#: .\templates\admin\object_history.html:51
 #: .\venv\Lib\site-packages\admin_black\templates\admin\object_history.html:51
 msgid "Action"
 msgstr ""
 
+#: .\templates\admin\object_history.html:52
 #: .\venv\Lib\site-packages\admin_black\templates\admin\object_history.html:52
 msgid "Date/time"
 msgstr ""
 
+#: .\templates\admin\object_history.html:68
 #: .\venv\Lib\site-packages\admin_black\templates\admin\object_history.html:68
 msgid ""
 "This object doesn't have a change history. It probably wasn't added via this "
 "admin site."
 msgstr ""
 
+#: .\templates\admin\pagination.html:31 .\templates\admin\search_form.html:23
 #: .\venv\Lib\site-packages\admin_black\templates\admin\pagination.html:31
 #: .\venv\Lib\site-packages\admin_black\templates\admin\search_form.html:23
 msgid "Show all"
 msgstr ""
 
+#: .\templates\admin\pagination.html:47 .\templates\admin\submit_line.html:7
 #: .\venv\Lib\site-packages\admin_black\templates\admin\pagination.html:47
 #: .\venv\Lib\site-packages\admin_black\templates\admin\submit_line.html:7
 msgid "Save"
 msgstr ""
 
+#: .\templates\admin\search_form.html:7
 #: .\venv\Lib\site-packages\admin_black\templates\admin\search_form.html:7
 msgid "Search"
 msgstr ""
 
+#: .\templates\admin\search_form.html:13
 #: .\venv\Lib\site-packages\admin_black\templates\admin\search_form.html:13
 #, python-format
 msgid ""
@@ -393,6 +457,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
+#: .\templates\admin\search_form.html:19
 #: .\venv\Lib\site-packages\admin_black\templates\admin\search_form.html:19
 #, python-format
 msgid ""
@@ -401,61 +466,86 @@ msgid ""
 "                                "
 msgstr ""
 
+#: .\templates\admin\submit_line.html:11
 #: .\venv\Lib\site-packages\admin_black\templates\admin\submit_line.html:11
 msgid "Save as new"
 msgstr ""
 
+#: .\templates\admin\submit_line.html:15
 #: .\venv\Lib\site-packages\admin_black\templates\admin\submit_line.html:15
 msgid "Save and add another"
 msgstr ""
 
+#: .\templates\admin\submit_line.html:19
 #: .\venv\Lib\site-packages\admin_black\templates\admin\submit_line.html:19
 msgid "Save and continue editing"
 msgstr ""
 
+#: .\templates\admin\submit_line.html:19
 #: .\venv\Lib\site-packages\admin_black\templates\admin\submit_line.html:19
 msgid "Save and view"
 msgstr ""
 
+#: .\templates\admin\submit_line.html:23
 #: .\venv\Lib\site-packages\admin_black\templates\admin\submit_line.html:23
 msgid "Close"
 msgstr ""
 
+#: .\templates\registration\logged_out.html:15
 #: .\venv\Lib\site-packages\admin_black\templates\registration\logged_out.html:15
 msgid "Log in"
 msgstr ""
 
+#: .\templates\registration\logged_out.html:16
+#: .\templates\registration\logged_out.html:33
 #: .\venv\Lib\site-packages\admin_black\templates\registration\logged_out.html:16
 #: .\venv\Lib\site-packages\admin_black\templates\registration\logged_out.html:33
 msgid "Thanks for spending some quality time with the Web site today."
 msgstr ""
 
+#: .\templates\registration\logged_out.html:20
 #: .\venv\Lib\site-packages\admin_black\templates\registration\logged_out.html:20
 msgid "Log in again"
 msgstr ""
 
+#: .\templates\registration\password_change_done.html:16
 #: .\venv\Lib\site-packages\admin_black\templates\registration\password_change_done.html:16
 msgid "Documentation"
 msgstr ""
 
+#: .\templates\registration\password_change_done.html:20
 #: .\venv\Lib\site-packages\admin_black\templates\registration\password_change_done.html:20
 msgid "Log out"
 msgstr ""
 
+#: .\templates\registration\password_change_done.html:37
+#: .\templates\registration\password_change_form.html:26
 #: .\venv\Lib\site-packages\admin_black\templates\registration\password_change_done.html:37
 #: .\venv\Lib\site-packages\admin_black\templates\registration\password_change_form.html:26
 msgid "Password change"
 msgstr ""
 
+#: .\templates\registration\password_change_done.html:52
+#: .\templates\registration\password_change_done.html:67
 #: .\venv\Lib\site-packages\admin_black\templates\registration\password_change_done.html:52
 #: .\venv\Lib\site-packages\admin_black\templates\registration\password_change_done.html:67
 msgid "Your password was changed."
 msgstr ""
 
+#: .\templates\registration\password_change_form.html:42
 #: .\venv\Lib\site-packages\admin_black\templates\registration\password_change_form.html:42
 msgid ""
 "Please enter your old password, for security's sake, and then enter your new "
 "password twice so we can verify you typed it in correctly."
+msgstr ""
+
+#: .\venv\Lib\site-packages\admin_black\forms.py:9
+#: .\venv\Lib\site-packages\admin_black\forms.py:10
+msgid "Password"
+msgstr ""
+
+#: .\venv\Lib\site-packages\admin_black\forms.py:13
+msgid "Password Confirmation"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\contrib\messages\apps.py:15
@@ -1660,3 +1750,15 @@ msgstr ""
 #: .\venv\Lib\site-packages\modeltranslation\widgets.py:24
 msgid "None"
 msgstr ""
+
+#~ msgid "Register"
+#~ msgstr "تسجيل جديد"
+
+#~ msgid "Logout"
+#~ msgstr "تسجيل خروج"
+
+#~ msgid "Purchases"
+#~ msgstr "المشتريات"
+
+#~ msgid "Sessions"
+#~ msgstr "جلسات"

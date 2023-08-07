@@ -19,6 +19,10 @@ class InstallMentsPlans(models.Model):
 
     def __str__(self):
         return f'Installment #{self.num_installments} with intrest #{self.interest}'
+    
+    class Meta:
+        verbose_name = _('InstallMentsPlans')
+        verbose_name_plural = _('InstallMentsPlans')
 
 
 class Installment(models.Model):
@@ -54,7 +58,10 @@ class Installment(models.Model):
             self.due_date = today + timedelta(days=months * 30)  # Assuming 30 days per month
 
         super().save(*args, **kwargs)
-    
+
+    class Meta:
+        verbose_name = _('Installment')
+        verbose_name_plural = _('Installment')
    
 
     
