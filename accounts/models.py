@@ -62,7 +62,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         unique=True,
     )
     name = models.CharField(max_length=255)
-    phone = models.BigIntegerField(unique=True,)
+    phone = models.CharField( max_length=20, unique=True,)
     date_of_birth = models.CharField(max_length=55,null=True,blank=False)
     is_vendor=  models.BooleanField(default=False , null=True)
     is_user = models.BooleanField(default=False, null=True)
