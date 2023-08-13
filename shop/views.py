@@ -33,7 +33,7 @@ class CategoryListAPIView(APIView):
         language = request.META.get('HTTP_ACCEPT_LANGUAGE')
         if language:
             translation.activate(language)
-        return Response(serializer.data)
+        return Response({'categories':serializer.data })
     
 
 
