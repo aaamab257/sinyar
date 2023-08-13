@@ -30,6 +30,8 @@ urlpatterns = i18n_patterns(
     path('cart/', include('cart.urls')),
     path('installment/', include('installment.urls')),
     path('provider/', include('provider.urls')),
+    path('settings/', include('settings.urls')),
+    
     path("set_language/<str:language>", set_language, name="set-language"),
 
     prefix_default_language=False

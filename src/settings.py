@@ -30,7 +30,7 @@ SECRET_KEY = "django-insecure-cibuo1z50wi(e1ux_6_*xk(fmsy5dkmj5r3))vp)_l(w=+f%=_
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "provider",
     "installment",
     "shop",
+    'settings',
     "notification",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -52,11 +53,18 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "django.contrib.admin",
+    "push_notifications",
 ]
+
+PUSH_NOTIFICATIONS_SETTINGS = {
+    "FCM_API_KEY": "720698579670",
+    "GCM_API_KEY": "AAAAp8z7mtY:APA91bHfVBSuElVJ8pg_qvpDjt8xjMTqUJ1LPira1OblHh5CL0PqSvocEELfc341GurquPoE5zvcRjhJOTIODv9qGzgZnar2Gd3cR102R8AnkndYMKhiYlDIvBncx_rAnsd7omld3URs",
+    "APNS_CERTIFICATE": "/path/to/your/certificate.pem",
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -94,9 +102,9 @@ WSGI_APPLICATION = "src.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
     }
 }
 

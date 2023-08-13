@@ -7,6 +7,8 @@ from django.utils.translation import gettext_lazy as _
 from reportlab.pdfgen import canvas
 
 
+admin.site.disable_action("delete_selected")
+
 
 
 @admin.action(description='Download PDF report')
@@ -103,8 +105,27 @@ class ProductAdmin(TranslationAdmin):
 
 
 
+    
 
 
+@admin.action(description="Mark selected requests as accepted")
+def accept_request(modeladmin, request, queryset):
+    queryset.update(status="a")
+
+
+@admin.action(description="Mark selected requests as refused")
+def refuse_request(modeladmin, request, queryset):
+    queryset.update(status="r")
+
+
+class RequestAdmin(admin.ModelAdmin):
+    list_display = ["user", "status"]
+    ordering = ["user" , "status"]
+    actions = [accept_request ,refuse_request ]
+    
+
+
+admin.site.register(Request, RequestAdmin)
 
 
 

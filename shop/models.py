@@ -1,5 +1,8 @@
 from django.db import models
+from django.dispatch import receiver
 from accounts.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils import timezone
 from installment.models import *
 from django.utils.translation import gettext_lazy as _
@@ -120,7 +123,11 @@ class OrderItem(models.Model):
     
     
     
-
+STATUS_CHOICES = [
+    ("a", "Accepted"),
+    ("r", "Refused"),
+    
+]
 
     
 
@@ -129,6 +136,11 @@ class Request(models.Model):
       user = models.ForeignKey(User , on_delete=models.CASCADE , verbose_name=_('User')  )
       plan = models.ForeignKey(InstallMentsPlans , on_delete=models.CASCADE , verbose_name=_('Plan') )
       product = models.ForeignKey(Product , on_delete=models.CASCADE , verbose_name=_('Product')  )
+      status = models.CharField(max_length=1, choices=STATUS_CHOICES , default="")
+
 
       def __str__(self):
-         return f'installment Request from #{self.user.pk}' 
+         return f'installment Request from #{self.user.pk}'
+      
+
+
