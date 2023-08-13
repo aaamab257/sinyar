@@ -16,7 +16,7 @@ from django.utils.translation import gettext_lazy as _
 class Category(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(unique=True)
-    image = models.ImageField(upload_to='categories/')
+    image = models.ImageField(upload_to='categories/' , default='')
 
     class Meta:
         verbose_name_plural = _("categories")
