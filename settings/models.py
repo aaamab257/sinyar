@@ -15,3 +15,16 @@ class OnBoarding(models.Model):
 
     def __str__(self):
         return self.title
+    
+
+
+class OffersSlider(models.Model):
+    title = models.CharField(max_length=50)
+    image = models.ImageField(upload_to='offersSliders/')
+    class Meta:
+        verbose_name_plural = _("OffersSlider")
+        verbose_name = _("OffersSlider")
+
+    def __str__(self):
+        return self.title
+

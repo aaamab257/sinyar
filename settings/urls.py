@@ -4,4 +4,5 @@ from .views import *
 
 urlpatterns = [
     path('onBoarding' , OnBoardingListAPIView.as_view() , name='images' ),
+    path('offers' , OffersListAPIView.as_view() , name='offers' ),
 ]

@@ -16,3 +16,13 @@ class OnBoardingListAPIView(APIView):
         if language:
             translation.activate(language)
         return Response({'onBoarding': serializer.data})
+    
+
+class OffersListAPIView(APIView):
+    def get(self, request, format=None):
+        offerSliders = OffersSlider.objects.all()
+        serializer = OffersSlider(offerSliders, many=True)
+        language = request.META.get('HTTP_ACCEPT_LANGUAGE')
+        if language:
+            translation.activate(language)
+        return Response({'sliders': serializer.data})
