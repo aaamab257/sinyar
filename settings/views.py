@@ -21,7 +21,7 @@ class OnBoardingListAPIView(APIView):
 class OffersListAPIView(APIView):
     def get(self, request, format=None):
         offerSliders = OffersSlider.objects.all()
-        serializer = OffersSlider(offerSliders, many=True)
+        serializer = OffersSerializer(offerSliders, many=True)
         language = request.META.get('HTTP_ACCEPT_LANGUAGE')
         if language:
             translation.activate(language)
