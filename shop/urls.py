@@ -9,5 +9,7 @@ urlpatterns = [
     path('api/products/', views.ProductListAPIView.as_view(), name='product-list-api'),
     path('api/subcategories/products/', views.SubCategoryProductListAPIView.as_view(), name='subcategory-product-list-api'),
     path('api/favorites/', views.FavoriteProductCreateAPIView.as_view(), name='favorite-product-create-api'),
+    path('api/subCategory/', views.GetSubCategoryListAPIView.as_view(), name='subCategory-list-api'),
+    
     path("set_language/<str:language>", set_language, name="set-language"),
 ]

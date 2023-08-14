@@ -36,6 +36,17 @@ class CategoryListAPIView(APIView):
         return Response({'categories':serializer.data })
     
 
+class GetSubCategoryListAPIView(APIView):
+    def post(self, request, format=None):
+        category_id = request.data.get('category_id')
+        sub_categories = SubCategory.objects.filter(parent=category_id)
+        serializer = SubCategorySerializer(sub_categories, many=True)
+        language = request.META.get('HTTP_ACCEPT_LANGUAGE')
+        if language:
+            translation.activate(language)
+        return Response({'subCategories':serializer.data })
+    
+
 
 class SubCategoryProductListAPIView(APIView):
     def post(self, request, format=None):
