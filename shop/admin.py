@@ -119,6 +119,7 @@ def refuse_request(modeladmin, request, queryset):
 
 
 class RequestAdmin(admin.ModelAdmin):
+    readonly_fields = ['user','plan' , 'product']
     list_display = ["user", "status"]
     ordering = ["user" , "status"]
     actions = [accept_request ,refuse_request ]
@@ -126,6 +127,8 @@ class RequestAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Request, RequestAdmin)
+
+admin.site.register(IntrestedCategory)
 
 
 

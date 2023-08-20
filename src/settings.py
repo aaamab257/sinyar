@@ -15,6 +15,9 @@ import os, random, string
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
 import dj_database_url
+from firebase_admin import initialize_app ,credentials
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
@@ -43,7 +46,7 @@ INSTALLED_APPS = [
     "provider",
     "installment",
     "shop",
-    'settings',
+    "settings",
     "notification",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -54,13 +57,36 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "django.contrib.admin",
     "push_notifications",
+    "fcm_django",
 ]
+cred = credentials.Certificate(
+    "seniar-firebase-adminsdk-v33az-b4c250ad55.json"
+)
+initialize_app(cred)
+
 
 PUSH_NOTIFICATIONS_SETTINGS = {
     "FCM_API_KEY": "720698579670",
     "GCM_API_KEY": "AAAAp8z7mtY:APA91bHfVBSuElVJ8pg_qvpDjt8xjMTqUJ1LPira1OblHh5CL0PqSvocEELfc341GurquPoE5zvcRjhJOTIODv9qGzgZnar2Gd3cR102R8AnkndYMKhiYlDIvBncx_rAnsd7omld3URs",
     "APNS_CERTIFICATE": "/path/to/your/certificate.pem",
 }
+
+FCM_DJANGO_SETTINGS = {
+    # an instance of firebase_admin.App to be used as default for all fcm-django requests
+    # default: None (the default Firebase app)
+    "DEFAULT_FIREBASE_APP": None,
+    # default: _('FCM Django')
+    "APP_VERBOSE_NAME": "[string for AppConfig's verbose_name]",
+    # true if you want to have only one active device per registered user at a time
+    # default: False
+    "ONE_DEVICE_PER_USER": True,
+    # devices to which notifications cannot be sent,
+    # are deleted upon receiving error response from FCM
+    # default: False
+    "DELETE_INACTIVE_DEVICES": False,
+}
+
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

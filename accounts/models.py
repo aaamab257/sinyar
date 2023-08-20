@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class MyUserManager(BaseUserManager):
-    def create_user(self, email ,  name ,phone, is_admin,is_vendor , is_user ,  password=None,password2=None,date_of_birth=None  ):
+    def create_user(self, email ,  name ,phone, is_admin,is_vendor,fcm_token , is_user ,  password=None,password2=None,date_of_birth=None  ):
         
         if not email:
             raise ValueError('Users must have an email address')
@@ -20,18 +20,20 @@ class MyUserManager(BaseUserManager):
             date_of_birth = date_of_birth,
             is_admin = is_admin,
             is_user = is_user,
-            is_vendor = is_vendor
+            is_vendor = is_vendor,
+            fcm_token = fcm_token
             
         )
         user.is_user = is_user 
         user.is_vendor = is_vendor 
         user.phone = phone
+        user.fcm_token =fcm_token
         user.is_admin = is_admin
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email,phone,is_admin ,is_user,is_vendor  ,  name , password=None ):
+    def create_superuser(self, email,phone,is_admin ,is_user,is_vendor ,fcm_token ,  name , password=None ):
         
         user = self.create_user(
             email,
@@ -39,12 +41,13 @@ class MyUserManager(BaseUserManager):
             password=password,
             is_user = is_user,
             is_vendor = is_vendor,
-            
+            fcm_token = fcm_token,
             phone=phone,
             is_admin=is_admin
         )
         user.phone = phone
         user.name = name
+        user.fcm_token =fcm_token
         user.is_user = False 
         user.is_vendor = False 
         user.is_admin = True
@@ -70,10 +73,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_admin = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    fcm_token = models.CharField(_("FCM Token"), max_length=200, null=True, blank=True)
     objects = MyUserManager()
 
     USERNAME_FIELD = 'phone'
-    REQUIRED_FIELDS = ['name','email' , 'is_admin']
+    REQUIRED_FIELDS = ['name','email' , 'is_admin' , 'fcm_token']
 
     def __str__(self):
         return "{}".format(self.email)
