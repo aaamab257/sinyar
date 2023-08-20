@@ -62,12 +62,12 @@ class UserLoginAPIView(APIView):
             serializer = TokenSerializer(
                 {"access": str(refresh.access_token), "refresh": str(refresh)}
             )
-            # send_notification(
-            #     user_fcm_device=user.fcm_token,
-            #     bodyContent=f"Welcome back {user.name}",
-            #     title="Login",
-            # )
-            send_push_notification()
+            send_notification(
+                user_fcm_device=user.fcm_token,
+                bodyContent=f"Welcome back {user.name}",
+                title="Login",
+            )
+            # send_push_notification()
             return Response(
                 {
                     "Token": serializer.data,
