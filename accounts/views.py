@@ -42,7 +42,8 @@ class UserRegisterAPIView(APIView):
     def post(self, request, format=None):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            user = serializer.save()
+            send_notification(user.fcm_token , 'Register' , 'Your Account Created Successfully')
             return Response(
                 {"user": serializer.data, "registered": True},
                 status=status.HTTP_201_CREATED,
