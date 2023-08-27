@@ -33,4 +33,9 @@ urlpatterns = [
         views.IntrestedCategories.as_view(),
         name="intrested_category",
     ),
+    path(
+        "api/makeRequest",
+        views.NewRequest.as_view(),
+        name="make_request",
+    ),
 ]

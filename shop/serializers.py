@@ -51,3 +51,13 @@ class CreateInterestedCategoriesSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = self.context.get("user")
         return IntrestedCategory.objects.create(user=user, **validated_data)
+    
+
+class RequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Request
+        fields = ( 'plan' , 'product' , 'status' )
+
+    def create(self, validated_data):
+        user = self.context.get("user")
+        return Request.objects.create(user=user, **validated_data)

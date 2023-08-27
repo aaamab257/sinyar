@@ -100,10 +100,11 @@ class GetMarkedCategory(APIView):
 class IntrestedCategories(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
+
     def post(self, request, format=None):
         user = request.user
         serializer = CreateInterestedCategoriesSerializer(
-            context = {"user": user}, data=request.data
+            context={"user": user}, data=request.data
         )
         if serializer.is_valid(raise_exception=True):
             serializer.save()
@@ -113,6 +114,24 @@ class IntrestedCategories(APIView):
                 },
                 status=status.HTTP_201_CREATED,
             )
+        return Response(
+            {
+                "errors": "Errors",
+            },
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+
+class NewRequest(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, format=None):
+        user = request.user
+        serializer = RequestSerializer(data=request.data, context={"user": user})
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response({"status": True}, status=status.HTTP_200_OK)
         return Response(
             {
                 "errors": "Errors",

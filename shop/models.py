@@ -129,6 +129,7 @@ class OrderItem(models.Model):
 STATUS_CHOICES = [
     ("a", "Accepted"),
     ("r", "Refused"),
+    ("p", "Pending"),
 ]
 
 
@@ -143,7 +144,7 @@ class Request(models.Model):
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default="")
 
     def __str__(self):
-        return f"installment Request from #{self.user.pk}"
+        return f"Installment Request from #{self.user.pk}"
 
 
 # class MarkedCategories(models.Model):

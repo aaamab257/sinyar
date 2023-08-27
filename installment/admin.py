@@ -11,9 +11,9 @@ class CategoryAdmin(admin.ModelAdmin):
     
 
 
-@admin.register(Installment)
-class InstallmentAdmin(admin.ModelAdmin):
-    list_display = ('plan', 'amount')
-    group_fieldsets = True
+# @admin.register(Installment)
+# class InstallmentAdmin(admin.ModelAdmin):
+#     list_display = ('plan', 'amount')
+#     group_fieldsets = True
     
     

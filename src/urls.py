@@ -21,10 +21,15 @@ from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
 from dashboard.views import set_language
 
+admin.site.site_header = "Sinyar Admin"
+admin.site.index_title = "Welcome to Sinyar Dashboard"
+admin.site.site_title = "Sinyar"
+
+
 urlpatterns = i18n_patterns(
-    path('', include('dashboard.urls')),
+    # path('', include('dashboard.urls')),
     path("admin/", admin.site.urls),
-    path("dashboard/", include('admin_black.urls')),
+    # path("dashboard/", include('admin_black.urls')),
     path("auth/" , include('accounts.urls')),
     path('shop/', include('shop.urls')),
     path('cart/', include('cart.urls')),

@@ -15,8 +15,7 @@ import os, random, string
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
 import dj_database_url
-from firebase_admin import initialize_app ,credentials
-
+from firebase_admin import initialize_app, credentials
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,7 +37,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-    "admin_black",
+    # "admin_black",
     "modeltranslation",
     "accounts",
     "dashboard",
@@ -56,12 +55,9 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "django.contrib.admin",
-    "push_notifications",
-    "fcm_django",
+    "django_rest_passwordreset",
 ]
-cred = credentials.Certificate(
-    "seniar-firebase-adminsdk-v33az-b4c250ad55.json"
-)
+cred = credentials.Certificate("seniar-firebase-adminsdk-v33az-b4c250ad55.json")
 initialize_app(cred)
 
 
@@ -87,7 +83,6 @@ FCM_DJANGO_SETTINGS = {
 }
 
 
-
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -107,7 +102,7 @@ DASHBOARD_TEMPLATES = os.path.join(BASE_DIR, "templates")
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [DASHBOARD_TEMPLATES],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -143,6 +138,11 @@ DATABASES = {
 
 # db_from_env = dj_database_url.config(conn_max_age=600)
 # DATABASES['default'].update(db_from_env)
+
+# Email Backend Configuration
+EMAIL_BACKEND = (
+    "django.core.mail.backends.smtp.EmailBackend"  # Replace with your preferred backend
+)
 
 
 # Password validation
@@ -218,5 +218,27 @@ MEDIA_URL = "/media/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_REDIRECT_URL = "/"
+
+DJANGO_REST_LOOKUP_FIELD = 'email'
+
+DJANGO_REST_PASSWORDRESET_IP_ADDRESS_HEADER = 'HTTP_X_FORWARDED_FOR'
+
+HTTP_USER_AGENT_HEADER = 'HTTP_USER_AGENT'
+
+
+DJANGO_REST_PASSWORDRESET_TOKEN_CONFIG = {
+    "CLASS": "django_rest_passwordreset.tokens.RandomNumberTokenGenerator",
+    "OPTIONS": {
+        "min_number": 1500,
+        "max_number": 9999
+    }
+}
+
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_PORT = 587  # Replace with your email port
+EMAIL_USE_TLS = False  # Set to False if your email server doesn't use TLS
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "beintrack766@gmail.com"  # Replace with your email username
+EMAIL_HOST_PASSWORD = "beintrack257"
+
 AUTH_USER_MODEL = "accounts.User"

@@ -94,8 +94,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     @property
     def is_staff(self):
-        
-        return self.is_admin
+        return self.is_admin | self.is_vendor
     
     class Meta:
         verbose_name = _('User')

@@ -3,19 +3,35 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import authenticate, login
-
+from django.contrib import messages
 from accounts.fcm_services import FCMThread
 from .serializers import *
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import *
+from rest_framework import generics, status, views, permissions
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
 import requests
-import json
+from django.utils.encoding import smart_str, force_str, smart_bytes, DjangoUnicodeDecodeError
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+from django.contrib.sites.shortcuts import get_current_site
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.urls import reverse
+from .utils import Util
+from drf_yasg.utils import swagger_auto_schema
+import jwt
+from drf_yasg import openapi
+from django.http import HttpResponsePermanentRedirect
+import os
+
 
 # Create your views here.
+
+class CustomRedirect(HttpResponsePermanentRedirect):
+
+    allowed_schemes = [os.environ.get('APP_SCHEME'), 'http', 'https']
 
 
 def send_notification(user_fcm_device, title, bodyContent):
@@ -80,6 +96,18 @@ class UserLoginAPIView(APIView):
             {"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED
         )
 
+# class ChangePassword(APIView):
+#     authentication_classes = [JWTAuthentication]
+#     permission_classes = [IsAuthenticated]
+#     def post(self, request, format=None):
+#         new_pass = request.data.get('new_password')
+#         user = request.user
+#         user.set_password(new_pass)
+#         user.save()
+
+
+
+
 
 def user_logout_view(request):
     logout(request)
@@ -113,3 +141,5 @@ def send_push_notification():
         print("Push notification sent successfully.")
     else:
         print("Failed to send push notification.")
+
+
