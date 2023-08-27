@@ -65,7 +65,7 @@ class CreateInterestedCategoriesSerializer(serializers.ModelSerializer):
 class RequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Request
-        fields = ("plan", "product", "status")
+        fields = ("plan", "product", "status", 'deposit')
 
     def create(self, validated_data):
         user = self.context.get("user")

@@ -27,6 +27,17 @@ def dashboard_update_handler(sender, instance, **kwargs):
                     "title": title,
                 },
             }
+        elif instance.status == "p":
+            title = "Your request Pending"
+            bodyM = "Installment request"
+            body = {
+                "to": instance.user.fcm_token,
+                "notification": {
+                    "body": bodyM,
+                    "title": title,
+                },
+            }
+
         else:
             title = "Your request Refused"
             bodyM = "Installment request"

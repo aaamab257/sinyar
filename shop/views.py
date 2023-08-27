@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login
 from .serializers import *
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import *
+import requests
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
 from django.utils.translation import gettext
@@ -131,6 +132,7 @@ class NewRequest(APIView):
         serializer = RequestSerializer(data=request.data, context={"user": user})
         if serializer.is_valid(raise_exception=True):
             serializer.save()
+            send_notification(user_fcm_device=user.fcm_token , title='Installment Request' , bodyContent="Your request sent successfully and under review")
             return Response({"status": True}, status=status.HTTP_200_OK)
         return Response(
             {
@@ -140,8 +142,26 @@ class NewRequest(APIView):
         )
     
 
-class PlansOfProduct(APIView):
-    def post(self, request, format=None):
-        product_id = request.data.get("product_id")
+def send_notification(user_fcm_device, title, bodyContent):
+    header = {
+        "Authorization": "key=AAAAp8z7mtY:APA91bHfVBSuElVJ8pg_qvpDjt8xjMTqUJ1LPira1OblHh5CL0PqSvocEELfc341GurquPoE5zvcRjhJOTIODv9qGzgZnar2Gd3cR102R8AnkndYMKhiYlDIvBncx_rAnsd7omld3URs",
+        "Content-Type": "application/json",
+    }
+
+    body = {
+        "to": user_fcm_device,
+        "notification": {"body": bodyContent, "title": title},
+    }
+
+    response = requests.post(
+        "https://fcm.googleapis.com/fcm/send",
+        headers=header,
+        json=body,
+    )
+    if response.status_code == 200:
+        data = response.json()
+
+
+
         
 

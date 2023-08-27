@@ -13,8 +13,9 @@ class UsersAdmin(admin.ModelAdmin):
     list_filter = ("name", "email", "phone")
     fieldsets = (
         ('User Credentials', {'fields': ('phone', 'password' )}),
-        ('Personal info', {'fields': ('name','email','date_of_birth')}),
+        ('Personal info', {'fields': ('name','email','date_of_birth' , 'fcm_token')}),
         ('Permissions', {'fields': ('is_admin', 'is_vendor', 'is_active' , 'is_superuser')}),
+        
     )
     
 
