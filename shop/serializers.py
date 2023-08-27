@@ -1,12 +1,20 @@
 from rest_framework import serializers
 from accounts.models import User
 from .models import *
+from installment.models import InstallMentsPlans
+
+
+class PlansSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = InstallMentsPlans
+        fields = "__all__"
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    plans = PlansSerializer(many=True)
     class Meta:
         model = Product
-        fields = ("id", "name", "description", "price", "image")
+        fields = ("id", "name", "description", "price", "image" , 'plans')
 
 
 class SubCategorySerializer(serializers.ModelSerializer):
@@ -44,6 +52,7 @@ class MarkedCategorySerializer(serializers.ModelSerializer):
 
 class CreateInterestedCategoriesSerializer(serializers.ModelSerializer):
     category = CategorySerializer(many=True, read_only=True)
+
     class Meta:
         model = IntrestedCategory
         fields = "__all__"
@@ -51,12 +60,12 @@ class CreateInterestedCategoriesSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = self.context.get("user")
         return IntrestedCategory.objects.create(user=user, **validated_data)
-    
+
 
 class RequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Request
-        fields = ( 'plan' , 'product' , 'status' )
+        fields = ("plan", "product", "status")
 
     def create(self, validated_data):
         user = self.context.get("user")

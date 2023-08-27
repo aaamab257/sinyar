@@ -15,5 +15,3 @@ class CategoryAdmin(admin.ModelAdmin):
 # class InstallmentAdmin(admin.ModelAdmin):
 #     list_display = ('plan', 'amount')
 #     group_fieldsets = True
-    
-    

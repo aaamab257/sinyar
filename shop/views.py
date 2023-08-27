@@ -138,3 +138,10 @@ class NewRequest(APIView):
             },
             status=status.HTTP_400_BAD_REQUEST,
         )
+    
+
+class PlansOfProduct(APIView):
+    def post(self, request, format=None):
+        product_id = request.data.get("product_id")
+        
+
