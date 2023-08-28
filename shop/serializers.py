@@ -12,9 +12,15 @@ class PlansSerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     plans = PlansSerializer(many=True)
+    is_fav = serializers.SerializerMethodField()
+
     class Meta:
         model = Product
-        fields = ("id", "name", "description", "price", "image" , 'plans')
+        fields = ("id", "name", "description", "price", "image" , 'plans' , 'is_fav')
+
+    def get_is_fav(self,obj):
+        user = self.context.get("user")
+        return True if user in obj.favorits.all() else False
 
 
 class SubCategorySerializer(serializers.ModelSerializer):

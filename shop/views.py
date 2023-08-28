@@ -7,10 +7,13 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from .models import *
 import requests
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated 
 from django.utils.translation import gettext
 from django.conf import settings
 from django.utils import translation
+
+
+
 
 
 class ProductListAPIView(APIView):
@@ -25,6 +28,20 @@ class ProductListAPIView(APIView):
 
 
 class CategoryListAPIView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    def get(self, request, format=None):
+        categories = Category.objects.all()
+        user = request.user
+        serializer = CategorySerializer(categories, many=True , context={'user':user})
+        language = request.META.get("HTTP_ACCEPT_LANGUAGE")
+        if language:
+            translation.activate(language)
+        return Response({"categories": serializer.data})
+           
+
+
+class GuestCategory(APIView):
     def get(self, request, format=None):
         categories = Category.objects.all()
         serializer = CategorySerializer(categories, many=True)
@@ -32,6 +49,8 @@ class CategoryListAPIView(APIView):
         if language:
             translation.activate(language)
         return Response({"categories": serializer.data})
+        
+
 
 
 class GetSubCategoryListAPIView(APIView):

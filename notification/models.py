@@ -19,6 +19,7 @@ class UserMessages(models.Model):
     title = models.CharField(max_length=55, default="")
     body = models.CharField(max_length=255, default="")
     created_at = models.DateTimeField(auto_now_add=True)
+    
 
 
     def __str__(self):

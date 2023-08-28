@@ -7,6 +7,10 @@ urlpatterns = [
     path(
         "api/categories/", views.CategoryListAPIView.as_view(), name="category-list-api"
     ),
+    # GuestCategory
+    path(
+        "api/guestCategory", views.GuestCategory.as_view(), name="category-list-api"
+    ),
     path("api/products/", views.ProductListAPIView.as_view(), name="product-list-api"),
     path(
         "api/subcategories/products/",

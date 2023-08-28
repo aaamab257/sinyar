@@ -83,6 +83,7 @@ class Product(models.Model):
     seller = models.ForeignKey(Vendor, on_delete=models.CASCADE, verbose_name="Vendor")
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
+    favorits = models.ManyToManyField(User)
 
     class Meta:
         verbose_name_plural = _("products")
