@@ -105,7 +105,7 @@ class FavoriteProductCreateAPIView(APIView):
         language = request.META.get("HTTP_ACCEPT_LANGUAGE")
         if language:
             translation.activate(language)
-        return Response(user_serializer.data)
+        return Response({'status':True})
 
 
 class GetMarkedCategory(APIView):
