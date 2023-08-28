@@ -98,7 +98,9 @@ class FavoriteProductCreateAPIView(APIView):
                 {"error": "Product does not exist."}, status=status.HTTP_404_NOT_FOUND
             )
 
-        user.favorites.add(product)
+        product.favorits.add(user)
+        product.save()
+        UserFavoriets.objects.create(user=user , product=product)
         user_serializer = UserSerializer(user)
         language = request.META.get("HTTP_ACCEPT_LANGUAGE")
         if language:
@@ -184,3 +186,11 @@ def send_notification(user_fcm_device, title, bodyContent):
 
         
 
+class GetAllFavoraites(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    def get(self, request, format=None):
+        user = request.user
+        favoraites = UserFavoriets.objects.filter(user=user)
+        serializer = UserFavoraitesSerializer( favoraites, many=True , context={'user':user})
+        return Response({'favoraites':serializer.data})

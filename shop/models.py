@@ -96,6 +96,7 @@ class Order(models.Model):
     PENDING_STATE = "p"
     COMPLETED_STATE = "c"
 
+
     ORDER_CHOICES = ((PENDING_STATE, "pending"), (COMPLETED_STATE, "completed"))
     status = models.CharField(
         max_length=1, choices=ORDER_CHOICES, default=PENDING_STATE
@@ -131,6 +132,7 @@ STATUS_CHOICES = [
     ("a", "Accepted"),
     ("r", "Refused"),
     ("p", "Pending"),
+    ("c", "Cancled"),
 ]
 
 
@@ -149,18 +151,6 @@ class Request(models.Model):
         return f"Installment Request from #{self.user.pk}"
 
 
-# class MarkedCategories(models.Model):
-#     user = models.ForeignKey(
-#         User, on_delete=models.CASCADE, verbose_name=_("User"), default=""
-#     )
-#     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name=_("Category"),)
-
-#     class Meta:
-#         verbose_name_plural = _("MarkedCategories")
-#         verbose_name = _("MarkedCategories")
-
-#     def __str__(self):
-#         return self.user.email
 
 
 class IntrestedCategory(models.Model):
@@ -176,6 +166,22 @@ class IntrestedCategory(models.Model):
     class Meta:
         verbose_name_plural = _("IntrestedCategory")
         verbose_name = _("IntrestedCategory")
+
+    def __str__(self):
+        return self.user.email
+
+
+class UserFavoriets(models.Model):
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, verbose_name=_("User")
+    )
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, verbose_name=_("Product")
+    )
+
+    class Meta:
+        verbose_name_plural = _("UserFavoriets")
+        verbose_name = _("UserFavoriets")
 
     def __str__(self):
         return self.user.email

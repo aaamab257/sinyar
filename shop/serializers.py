@@ -76,3 +76,16 @@ class RequestSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = self.context.get("user")
         return Request.objects.create(user=user, **validated_data)
+
+
+class UserFavoraitesSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+    product = ProductSerializer()
+    class Meta:
+        model = UserFavoriets
+        fields= ('user' , 'product')
+        
+    def get_is_fav(self,obj):
+        user = self.context.get("user")
+        return True if user in obj.product.favorits.all() else False
+    

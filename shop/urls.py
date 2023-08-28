@@ -42,4 +42,12 @@ urlpatterns = [
         views.NewRequest.as_view(),
         name="make_request",
     ),
+
+    # GetAllFavoraites
+
+    path(
+        "api/getFavoraites",
+        views.GetAllFavoraites.as_view(),
+        name="getFavo",
+    ),
 ]
