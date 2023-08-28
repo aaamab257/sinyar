@@ -22,6 +22,12 @@ urlpatterns = [
         views.FavoriteProductCreateAPIView.as_view(),
         name="favorite-product-create-api",
     ),
+    # FavoriteRemoveProduct
+    path(
+        "api/removeFavorites/",
+        views.FavoriteRemoveProduct.as_view(),
+        name="favorite-product-create-api",
+    ),
     path(
         "api/subCategory/",
         views.GetSubCategoryListAPIView.as_view(),

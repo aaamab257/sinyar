@@ -106,6 +106,31 @@ class FavoriteProductCreateAPIView(APIView):
         if language:
             translation.activate(language)
         return Response({'status':True})
+    
+class FavoriteRemoveProduct(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, format=None):
+        user = request.user
+        product_id = request.data.get("product_id")
+
+        try:
+            product = Product.objects.get(pk=product_id)
+        except Product.DoesNotExist:
+            return Response(
+                {"error": "Product does not exist."}, status=status.HTTP_404_NOT_FOUND
+            )
+
+        product.favorits.remove(user)
+        product.save()
+        fav = UserFavoriets.objects.filter(user=user , product=product)
+        fav.delete()
+        user_serializer = UserSerializer(user)
+        language = request.META.get("HTTP_ACCEPT_LANGUAGE")
+        if language:
+            translation.activate(language)
+        return Response({'status':True})
 
 
 class GetMarkedCategory(APIView):
