@@ -97,15 +97,21 @@ class FavoriteProductCreateAPIView(APIView):
             return Response(
                 {"error": "Product does not exist."}, status=status.HTTP_404_NOT_FOUND
             )
+        if user not in product.favorits.all():
+            product.favorits.add(user)
+            product.save()
+            UserFavoriets.objects.create(user=user , product=product)
+            user_serializer = UserSerializer(user)
+            language = request.META.get("HTTP_ACCEPT_LANGUAGE")
+            if language:
+               translation.activate(language)
+            return Response({'status':True})
+        else :
+            return Response({'status':False})
 
-        product.favorits.add(user)
-        product.save()
-        UserFavoriets.objects.create(user=user , product=product)
-        user_serializer = UserSerializer(user)
-        language = request.META.get("HTTP_ACCEPT_LANGUAGE")
-        if language:
-            translation.activate(language)
-        return Response({'status':True})
+
+        
+        
     
 class FavoriteRemoveProduct(APIView):
     authentication_classes = [JWTAuthentication]
