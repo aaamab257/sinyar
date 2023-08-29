@@ -127,15 +127,16 @@ class FavoriteRemoveProduct(APIView):
             return Response(
                 {"error": "Product does not exist."}, status=status.HTTP_404_NOT_FOUND
             )
+        if user not in product.favorits.all():
 
-        product.favorits.remove(user)
-        product.save()
-        fav = UserFavoriets.objects.filter(user=user , product=product)
-        fav.delete()
-        user_serializer = UserSerializer(user)
-        language = request.META.get("HTTP_ACCEPT_LANGUAGE")
-        if language:
-            translation.activate(language)
+           product.favorits.remove(user)
+           product.save()
+           fav = UserFavoriets.objects.filter(user=user , product=product)
+           fav.delete()
+           user_serializer = UserSerializer(user)
+           language = request.META.get("HTTP_ACCEPT_LANGUAGE")
+           if language:
+              translation.activate(language)
         return Response({'status':True})
 
 
