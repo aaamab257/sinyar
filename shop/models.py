@@ -146,7 +146,7 @@ class Request(models.Model):
         Product, on_delete=models.CASCADE, verbose_name=_("Product")
     )
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default="")
-    deposit = models.CharField(max_length=55 , default='')
+    deposit = models.CharField(max_length=55 , default='', blank=True)
 
     def __str__(self):
         return f"Installment Request from #{self.user.pk}"
