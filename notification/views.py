@@ -17,12 +17,18 @@ from .models import *
 class GetNotifications(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
-    def get(self, request , format=None):
+
+    def get(self, request, format=None):
         user = request.user
         notifications = UserMessages.objects.filter(user=user)
         serializer = MessagesSerializer(notifications, many=True)
         public = Notification.objects.all()
-        notifiSer = NotificationsSerializer(public , many=True)
-        return Response({'notifications':serializer.data , 'public':notifiSer.data})
-
-
+        notifiSer = NotificationsSerializer(public, many=True)
+        return Response(
+            {
+                "notifications": {
+                    "messages": serializer.data,
+                    "public": notifiSer.data,
+                }
+            }
+        )

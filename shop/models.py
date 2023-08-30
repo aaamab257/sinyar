@@ -158,9 +158,8 @@ class IntrestedCategory(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, verbose_name=_("User"), default=""
     )
-    category = models.ForeignKey(
+    category = models.ManyToManyField(
         Category,
-        on_delete=models.CASCADE,
         verbose_name=_("Category"),
     )
 

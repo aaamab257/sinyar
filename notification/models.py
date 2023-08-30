@@ -1,6 +1,8 @@
+from datetime import timezone
 from django.db import models
 from accounts.models import User
 from django.utils.translation import gettext_lazy as _
+
 
 # Create your models here.
 
@@ -9,7 +11,10 @@ class Notification(models.Model):
     title = models.CharField(max_length=55, default="")
     message = models.TextField(max_length=255, default="")
     is_opened = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True )
+    
 
+    # , default='2023-08-27T11:56:26.123140Z'
     def __str__(self):
         return self.title
 

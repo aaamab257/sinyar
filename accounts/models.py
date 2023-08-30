@@ -14,7 +14,6 @@ class MyUserManager(BaseUserManager):
 
         user = self.model(
             email=self.normalize_email(email),
-            
             name= name,
             phone = phone,
             date_of_birth = date_of_birth,
@@ -90,11 +89,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         
         return True
 
-    
-
     @property
     def is_staff(self):
-        return self.is_admin | self.is_vendor
+        return self.is_admin
     
     class Meta:
         verbose_name = _('User')

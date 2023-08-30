@@ -1,42 +1,37 @@
 from typing import Optional
 from django.contrib import admin
 from django.http.request import HttpRequest
+from django.contrib.auth.admin import UserAdmin
 from .models import *
 
 # Register your models here.
 
 
-class UsersAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"name": ("name",)}
-    list_display = ("name", "email")
-    search_fields = ("name", "email", "phone")
-    list_filter = ("name", "email", "phone")
-    fieldsets = (
-        ('User Credentials', {'fields': ('phone', 'password' )}),
-        ('Personal info', {'fields': ('name','email','date_of_birth' , 'fcm_token')}),
-        ('Permissions', {'fields': ('is_admin', 'is_vendor', 'is_active' , 'is_superuser')}),
-        
-    )
-    
 
-    def has_add_permission(self, request):
-        if request.user.is_admin:
-            return True
+
+
+
+@admin.register(User)
+class CustomUserAdmin(admin.ModelAdmin):
+
+    def has_delete_permission(self, request, obj=None):
+        is_admin = request.user.is_admin
+        if not is_admin:
+           return False
         else:
-            return False
-
+            return True
+        
     def has_change_permission(self, request, obj=None):
-        if request.user.is_admin:
-            if not request.user.is_vendor:
-               return True
-        else:
-            return False
-        
-    def has_view_permission(self, request, obj=None):
-        if request.user.is_vendor:
-            return False
+        is_admin = request.user.is_admin
+        if not is_admin:
+           return False
         else:
             return True
+        
+    def has_add_permission(self, request, obj=None):
+        is_admin = request.user.is_admin
+        if not is_admin:
+           return False
+        else:
+            return True    
 
-
-admin.site.register(User, UsersAdmin)

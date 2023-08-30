@@ -59,9 +59,13 @@ class UserRegisterAPIView(APIView):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
+            refresh = RefreshToken.for_user(user)
+            serializerToken = TokenSerializer(
+                {"access": str(refresh.access_token), "refresh": str(refresh)}
+            )
             send_notification(user.fcm_token , 'Register' , 'Your Account Created Successfully')
             return Response(
-                {"user": serializer.data, "registered": True},
+                {"user": serializer.data, 'token':serializerToken.data,  "registered": True},
                 status=status.HTTP_201_CREATED,
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
