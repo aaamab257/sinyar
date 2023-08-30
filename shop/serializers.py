@@ -2,6 +2,7 @@ from rest_framework import serializers
 from accounts.models import User
 from .models import *
 from installment.models import InstallMentsPlans
+from accounts.serializers import UserSerializer
 
 
 class PlansSerializer(serializers.ModelSerializer):
@@ -91,6 +92,9 @@ class UserFavoraitesSerializer(serializers.ModelSerializer):
     
 
 class GetRequestSerializer(serializers.ModelSerializer):
+    plan = PlansSerializer()
+    product = ProductSerializer()
+    user = UserSerializer()
     class Meta:
         model = Request
-        fields = '__all__'
+        fields = ('plan' ,'deposit' , 'user' , 'product')
