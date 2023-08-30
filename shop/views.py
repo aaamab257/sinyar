@@ -215,6 +215,24 @@ def send_notification(user_fcm_device, title, bodyContent):
         data = response.json()
 
 
+class GetCurrentRequests(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    def get(self, request, format=None):
+        user = request.user
+        current = Request.objects.filter(user=user , status='p') 
+        serializer = GetRequestSerializer(current,many=True)
+        return Response({"current": serializer.data})
+    
+    
+class GetPerviousRequests(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    def get(self, request, format=None):
+        user = request.user
+        pervious = Request.objects.filter(user=user , status='a') 
+        serializer = GetRequestSerializer(pervious,many=True)
+        return Response({"pervious": serializer.data})
 
         
 

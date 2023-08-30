@@ -56,4 +56,15 @@ urlpatterns = [
         views.GetAllFavoraites.as_view(),
         name="getFavo",
     ),
+
+    path(
+        "api/getCurrentRequest",
+        views.GetCurrentRequests.as_view(),
+        name="getCreq",
+    ),
+    path(
+        "api/getPerviousRequest",
+        views.GetPerviousRequests.as_view(),
+        name="getPreq",
+    ),
 ]

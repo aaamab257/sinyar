@@ -89,3 +89,8 @@ class UserFavoraitesSerializer(serializers.ModelSerializer):
         user = self.context.get("user")
         return True if user in obj.product.favorits.all() else False
     
+
+class GetRequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Request
+        fields = '__all__'
