@@ -75,10 +75,13 @@ class UserLoginAPIView(APIView):
     def post(self, request, format=None):
         phone = request.data.get("phone")
         password = request.data.get("password")
+        fcm = request.data.get("fcm_token")
         user = authenticate(username=phone, password=password)
         if user is not None:
             login(request, user)
             user_serializer = UserSerializer(user)
+            user.fcm_token = fcm
+            user.save()
             refresh = RefreshToken.for_user(user)
             serializer = TokenSerializer(
                 {"access": str(refresh.access_token), "refresh": str(refresh)}
