@@ -3,10 +3,16 @@ from admin_argon.forms import RegistrationForm, LoginForm, UserPasswordResetForm
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetConfirmView, PasswordChangeView
 from django.contrib.auth import logout
 from accounts.forms import *
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 
 
 User = get_user_model()
+
+
+@login_required
+def index(request):
+  return render(request, 'pages/dashboard.html')
 
 
 def register(request):
