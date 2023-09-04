@@ -11,13 +11,6 @@ User = get_user_model()
 
 
 
-
-def index(request):
-  form = LoginForm
-  context={'form':form}
-  return render(request, 'accounts/sign-in.html', context)
-
-
 def register(request):
   if request.method == 'POST':
     form = RegistrationForm(request.POST)
