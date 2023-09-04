@@ -13,7 +13,9 @@ User = get_user_model()
 
 
 def index(request):
-  return render(request , 'accounts/sign-in.html')
+  form = LoginForm
+  context={'form':form}
+  return render(request, 'accounts/sign-in.html', context)
 
 
 def register(request):
