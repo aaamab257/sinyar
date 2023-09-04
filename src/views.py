@@ -12,6 +12,8 @@ User = get_user_model()
 
 
 
+def index(request):
+  return render(request , 'accounts/sign-in.html')
 
 
 def register(request):
