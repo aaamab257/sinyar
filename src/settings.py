@@ -55,7 +55,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "django.contrib.admin",
-    "django_rest_passwordreset",
+    'home',
+    'admin_argon',
 ]
 cred = credentials.Certificate("seniar-firebase-adminsdk-v33az-b4c250ad55.json")
 initialize_app(cred)
@@ -102,7 +103,7 @@ DASHBOARD_TEMPLATES = os.path.join(BASE_DIR, "templates")
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [DASHBOARD_TEMPLATES],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -219,20 +220,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_REDIRECT_URL = "/"
 
-DJANGO_REST_LOOKUP_FIELD = 'email'
-
-DJANGO_REST_PASSWORDRESET_IP_ADDRESS_HEADER = 'HTTP_X_FORWARDED_FOR'
 
 HTTP_USER_AGENT_HEADER = 'HTTP_USER_AGENT'
 
-
-DJANGO_REST_PASSWORDRESET_TOKEN_CONFIG = {
-    "CLASS": "django_rest_passwordreset.tokens.RandomNumberTokenGenerator",
-    "OPTIONS": {
-        "min_number": 1500,
-        "max_number": 9999
-    }
-}
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 EMAIL_PORT = 587  # Replace with your email port
