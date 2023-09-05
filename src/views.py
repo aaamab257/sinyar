@@ -5,10 +5,15 @@ from django.contrib.auth import logout
 from accounts.forms import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
-
+from notification.models import *
 
 User = get_user_model()
 
+
+def notifications(request):
+  notifications = AdminNotification.objects.all()
+  context = {'notify':notifications}
+  return render(request , 'includes/navigation.html' , context)
 
 
 def register(request):

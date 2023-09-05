@@ -10,9 +10,39 @@ class NotificationAdmin(admin.ModelAdmin):
     list_filter = ["title", "message"]
     search_fields = ["message", "title"]
     exclude = ["is_opened"]
+    
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        # Customize the queryset, e.g., filter by user or order by timestamp
+        return qs
+
+    def changelist_view(self, request, extra_context=None):
+        if extra_context is None:
+            extra_context = {}
+        extra_context['unread_count'] = self.get_queryset(request).filter(is_opened=False).count()
+        return super().changelist_view(request, extra_context=extra_context)
 
 
 admin.site.register(Notification, NotificationAdmin)
+
+
+class AdminNotificationAdmin(admin.ModelAdmin):
+    list_display = ('message', 'timestamp', 'is_read')
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        # Customize the queryset, e.g., filter by user or order by timestamp
+        return qs
+
+    def changelist_view(self, request, extra_context=None):
+        if extra_context is None:
+            extra_context = {}
+        extra_context['unread_count'] = self.get_queryset(request).filter(is_read=False).count()
+        return super().changelist_view(request, extra_context=extra_context)
+
+admin.site.register(AdminNotification, AdminNotificationAdmin)
+
+
 
 
 class UserMessageAdmin(admin.ModelAdmin):

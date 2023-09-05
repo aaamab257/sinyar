@@ -1,9 +1,11 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.contrib.auth.models import User
-from .models import Notification
+from django.contrib.auth import get_user_model
+from .models import *
 import requests
 
+
+User = get_user_model()
 
 @receiver(post_save, sender=Notification)
 def create_notification(sender, instance, created, **kwargs):
@@ -32,3 +34,12 @@ def create_notification(sender, instance, created, **kwargs):
             if response.status_code == 200:
                 data = response.json()
                 print(f"{data}")
+
+
+@receiver(post_save, sender=User)
+def send_notification(sender, instance, created, **kwargs):
+    if created:
+        title = "Users Registrations"
+        message = f"New user registered: {instance.email}"
+        notification = AdminNotification.objects.create(message=message )
+        notification.save()

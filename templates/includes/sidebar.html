@@ -25,7 +25,7 @@
                     </a>
 
                   {% if app.models %}
-                    <div class="multi-level ms-5  {% if 'tables-bootstrap-' in segment or app_label == app.label or app.url in request.path|urlencode %} show {% endif %}" role="list" id="submenu-{{ app.app_label }}"                                                                                                       aria-expanded="{% if app_label == app.label or app.url in request.path|urlencode %}true{% else %}false{% endif %}">
+                    <div class="multi-level ms-5 {% if 'tables-bootstrap-' in segment or app_label == app.label or app.url in request.path|urlencode %} show {% endif %}" role="list" id="submenu-{{ app.app_label }}"                                                                                                       aria-expanded="{% if app_label == app.label or app.url in request.path|urlencode %}true{% else %}false{% endif %}">
                       <ul class="flex-column nav">
                         {% for model in app.models %}
                           {% if model.url %}

@@ -29,3 +29,14 @@ class UserMessages(models.Model):
 
     def __str__(self):
         return f"Notification for {self.user.name}"
+    
+
+class AdminNotification(models.Model):
+    title = models.CharField(max_length=55, default="")
+    message = models.CharField(max_length=255)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
+
+
+    def __str__(self):
+        return f"Notification Title :{self.title}"
