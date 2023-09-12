@@ -72,7 +72,7 @@ class CreateInterestedCategoriesSerializer(serializers.ModelSerializer):
 class RequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Request
-        fields = ("plan", "product", "status", 'deposit')
+        fields = ("plan", "product", "status", 'deposit','id_image_front' , 'id_image_back' , 'another_files')
 
     def create(self, validated_data):
         user = self.context.get("user")

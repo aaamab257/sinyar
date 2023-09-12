@@ -147,6 +147,9 @@ class Request(models.Model):
     )
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default="")
     deposit = models.CharField(max_length=55 , default='', blank=True)
+    id_image_front = models.ImageField(upload_to="requests/frontId/" , default='')
+    id_image_back = models.ImageField(upload_to="requests/backId/", default='')
+    another_files = models.ImageField(upload_to="requests/anotherFiles", default='')
 
     def __str__(self):
         return f"Installment Request from #{self.user.pk}"
