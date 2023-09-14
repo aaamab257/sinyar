@@ -111,14 +111,22 @@ class UserLoginAPIView(APIView):
             {"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED
         )
 
-# class ChangePassword(APIView):
-#     authentication_classes = [JWTAuthentication]
-#     permission_classes = [IsAuthenticated]
-#     def post(self, request, format=None):
-#         new_pass = request.data.get('new_password')
-#         user = request.user
-#         user.set_password(new_pass)
-#         user.save()
+class ChangePassword(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    def post(self, request, format=None):
+        old_pass = request.data.get('old_password')
+        new_pass = request.data.get('new_password')
+        user = request.user
+        if not user.check_password(old_pass):
+            return Response({'status': status.HTTP_404_NOT_FOUND,'user' :"Old password is Invalid" }, status=status.HTTP_404_NOT_FOUND)
+        if user is None:
+            return Response({'status': status.HTTP_404_NOT_FOUND,'user' :"User Not Found" }, status=status.HTTP_404_NOT_FOUND)
+        else:
+            serializer = UserSerializer(user)
+            user.set_password(new_pass)
+            user.save()
+            return Response({'status': status.HTTP_200_OK,'user' :serializer.data})
 
 
 
@@ -206,3 +214,33 @@ def register_user(request):
         form = SignUpForm()
 
     return render(request, "accounts/register.html", {"form": form, "msg": msg, "success": success})
+
+
+class GetUserInfo(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, format=None):
+        user= request.user
+        if user is None:
+            return Response({'status': status.HTTP_404_NOT_FOUND, 'user' :"User Not Found"}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            serializer = UserSerializer(user)
+            return Response({'status': status.HTTP_200_OK,'user' :serializer.data}, status=status.HTTP_200_OK)
+        
+
+class EditProfile(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    def post(self , request , format=None):
+        name = request.data.get('name')
+        email = request.data.get('email')
+        user = request .user 
+        if user is None: 
+            return Response({'user':'Not Found' , 'status':status.HTTP_404_NOT_FOUND})
+        else:
+            user.name = name 
+            user.email= email 
+            user.save()
+            serializer = UserSerializer(user)
+            return Response({'user':serializer.data , 'status':status.HTTP_200_OK})
