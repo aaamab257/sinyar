@@ -45,9 +45,6 @@ urlpatterns = i18n_patterns(
     path('settings/', include('settings.urls')),
     path('notifications/', include('notification.urls')),
     path("set_language/<str:language>", set_language, name="set-language"),
-    # path("", include("accounts.urls")), # Auth routes - login / register
-    # path("", include("home.urls")), 
-    # path('', index , name='index'),
     path('', include("admin_argon.urls")), 
     path('accounts/login/', UserLoginView.as_view(), name='login'),
     path('accounts/logout/',user_logout_view, name='logout'),

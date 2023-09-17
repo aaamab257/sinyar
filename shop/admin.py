@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.http.request import HttpRequest
 from .models import *
 from django.contrib.auth.models import Group, User
 from modeltranslation.admin import TranslationAdmin
@@ -72,6 +73,30 @@ class SubCategoryAdmin(TranslationAdmin):
     prepopulated_fields = {"name": ("name",)}
     list_display = ("name", "email")
     group_fieldsets = True
+    
+    def has_view_permission(self, request, obj=None):
+        if  request.user.is_vendor:
+           return False
+        else:
+            return True
+    
+    def has_change_permission(self, request, obj=None):
+        if  request.user.is_vendor:
+           return False
+        else:
+            return True
+
+    def has_add_permission(self, request, obj=None):
+        if  request.user.is_vendor:
+           return False
+        else:
+            return True
+
+    def has_delete_permission(self, request, obj=None):
+        if  request.user.is_vendor:
+           return False
+        else:
+            return True
 
     class Media:
         js = (
@@ -83,6 +108,7 @@ class SubCategoryAdmin(TranslationAdmin):
             "screen": ("modeltranslation/css/tabbed_translation_fields.css",),
         }
 
+    
 
 @admin.register(Product)
 class ProductAdmin(TranslationAdmin):

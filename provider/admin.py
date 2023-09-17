@@ -13,6 +13,31 @@ from reportlab.pdfgen import canvas
 class ProviderAdmin(admin.ModelAdmin):
     prepopulated_fields = {'name': ('name',)}
     group_fieldsets = True
+
+    def has_view_permission(self, request, obj=None):
+        if request.user.is_vendor:
+           return False
+        else:
+            return True
+    
+    def has_change_permission(self, request, obj=None):
+        if request.user.is_vendor:
+           return False
+        else:
+            return True
+
+    def has_add_permission(self, request, obj=None):
+        if request.user.is_vendor:
+           return False
+        else:
+            return True
+
+    def has_delete_permission(self, request, obj=None):
+        if request.user.is_vendor:
+           return False
+        else:
+            return True
+
     class Media:
         js = (
             'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
@@ -29,6 +54,31 @@ class ProviderAdmin(admin.ModelAdmin):
     prepopulated_fields = {'name': ('name',)}
     list_display = ( 'name','provider',)
     group_fieldsets = True
+
+    def has_view_permission(self, request, obj=None):
+        if request.user.is_vendor:
+           return False
+        else:
+            return True
+    
+    def has_change_permission(self, request, obj=None):
+        if request.user.is_vendor:
+           return False
+        else:
+            return True
+
+    def has_add_permission(self, request, obj=None):
+        if request.user.is_vendor:
+           return False
+        else:
+            return True
+
+    def has_delete_permission(self, request, obj=None):
+        if request.user.is_vendor:
+           return False
+        else:
+            return True
+        
     class Media:
         js = (
             'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',

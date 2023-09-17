@@ -69,7 +69,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_vendor=  models.BooleanField(default=False , null=True)
     is_user = models.BooleanField(default=False, null=True)
     is_active = models.BooleanField(default=True)
-    is_admin = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     fcm_token = models.CharField(_("FCM Token"), max_length=200, null=True, blank=True)

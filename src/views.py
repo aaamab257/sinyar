@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
-from admin_argon.forms import RegistrationForm, LoginForm, UserPasswordResetForm, UserSetPasswordForm, UserPasswordChangeForm
+from admin_argon.forms import RegistrationForm, UserPasswordResetForm, UserSetPasswordForm, UserPasswordChangeForm
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetConfirmView, PasswordChangeView
 from django.contrib.auth import logout
-from accounts.forms import *
+from accounts.forms import SignUpForm , LoginForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from notification.models import *
+from django.contrib.auth.forms import  AuthenticationForm
 
 User = get_user_model()
 
@@ -18,16 +19,17 @@ def notifications(request):
 
 def register(request):
   if request.method == 'POST':
-    form = RegistrationForm(request.POST)
+    form = SignUpForm(request.POST)
     if form.is_valid():
-      form.save()
-      print("Account created successfully!")
-      return redirect('/accounts/login/')
+       form.save()
+       print("Account created successfully!")
+       return redirect('/accounts/login/')
     else:
-      print("Registration failed!")
+       print("Registration failed!")
   else:
     form = SignUpForm()
 
+  
   context = { 'form': form }
   return render(request, 'accounts/sign-up.html', context)
 

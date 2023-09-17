@@ -10,6 +10,30 @@ class NotificationAdmin(admin.ModelAdmin):
     list_filter = ["title", "message"]
     search_fields = ["message", "title"]
     exclude = ["is_opened"]
+
+    def has_view_permission(self, request, obj=None):
+        if request.user.is_vendor:
+           return False
+        else:
+            return True
+    
+    def has_change_permission(self, request, obj=None):
+        if request.user.is_vendor:
+           return False
+        else:
+            return True
+
+    def has_add_permission(self, request, obj=None):
+        if request.user.is_vendor:
+           return False
+        else:
+            return True
+
+    def has_delete_permission(self, request, obj=None):
+        if request.user.is_vendor:
+           return False
+        else:
+            return True
     
     def get_queryset(self, request):
         qs = super().get_queryset(request)
@@ -28,6 +52,30 @@ admin.site.register(Notification, NotificationAdmin)
 
 class AdminNotificationAdmin(admin.ModelAdmin):
     list_display = ('message', 'timestamp', 'is_read')
+
+    def has_view_permission(self, request, obj=None):
+        if request.user.is_vendor:
+           return False
+        else:
+            return True
+    
+    def has_change_permission(self, request, obj=None):
+        if request.user.is_vendor:
+           return False
+        else:
+            return True
+
+    def has_add_permission(self, request, obj=None):
+        if request.user.is_vendor:
+           return False
+        else:
+            return True
+
+    def has_delete_permission(self, request, obj=None):
+        if request.user.is_vendor:
+           return False
+        else:
+            return True
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
@@ -50,6 +98,30 @@ class UserMessageAdmin(admin.ModelAdmin):
     list_filter = ["user","title", "body"]
     search_fields = ["user","body", "title"]
     readonly_fields = ["user","created_at","body", "title"]
+
+    def has_view_permission(self, request, obj=None):
+        if request.user.is_vendor:
+           return False
+        else:
+            return True
+    
+    def has_change_permission(self, request, obj=None):
+        if request.user.is_vendor:
+           return False
+        else:
+            return True
+
+    def has_add_permission(self, request, obj=None):
+        if request.user.is_vendor:
+           return False
+        else:
+            return True
+
+    def has_delete_permission(self, request, obj=None):
+        if request.user.is_vendor:
+           return False
+        else:
+            return True
 
 
 admin.site.register(UserMessages, UserMessageAdmin)

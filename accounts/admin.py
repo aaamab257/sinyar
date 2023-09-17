@@ -14,23 +14,26 @@ from .models import *
 @admin.register(User)
 class CustomUserAdmin(admin.ModelAdmin):
 
-    def has_delete_permission(self, request, obj=None):
-        is_admin = request.user.is_admin
-        if not is_admin:
+    def has_view_permission(self, request, obj=None):
+        if request.user.is_vendor:
            return False
         else:
             return True
-        
+    
     def has_change_permission(self, request, obj=None):
-        is_admin = request.user.is_admin
-        if not is_admin:
+        if request.user.is_vendor:
            return False
         else:
             return True
-        
+
     def has_add_permission(self, request, obj=None):
-        is_admin = request.user.is_admin
-        if not is_admin:
+        if request.user.is_vendor:
+           return False
+        else:
+            return True
+
+    def has_delete_permission(self, request, obj=None):
+        if request.user.is_vendor:
            return False
         else:
             return True    

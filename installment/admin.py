@@ -8,6 +8,7 @@ class CategoryAdmin(admin.ModelAdmin):
     
     list_display = ('num_installments', 'interest')
     group_fieldsets = True
+
     
 
 
